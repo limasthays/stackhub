@@ -13,10 +13,10 @@ export function Homepage() {
 
 			<div className="flex flex-col justify-center items-center gap-4 mt-4">
 				<div className="text-center">
-					<h1 className="md:text-4xl">stackhub</h1>
-
+					<h1>stackhub</h1>
 					<span className="font-bold">todas as suas techs em um só lugar.</span>
 				</div>
+
 				<Button title="cadastre-se" variant="secondary" />
 				<Button title="login" variant="primary" />
 			</div>
