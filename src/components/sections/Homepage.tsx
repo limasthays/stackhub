@@ -1,4 +1,4 @@
-import { Button } from '../ui/Button'
+import { Button } from '../ui/form-components/Button'
 import Image from 'next/image'
 import MainIllustration from '../../../public/images/main-illustration.svg'
 import { useRouter } from 'next/router'
@@ -16,13 +16,14 @@ export function Homepage() {
 
 			<div className="flex flex-col justify-center items-center gap-4 mt-4">
 				<div className="text-center mb-2">
-					<h1 className="">stackhub</h1>
+					<h1>stackhub</h1>
 					<span className="font-bold">todas as suas techs em um só lugar.</span>
 				</div>
 
 				<Button
 					title="cadastre-se"
 					variant="secondary"
+					type="button"
 					onClick={(event) => {
 						event.preventDefault()
 						router.push('/signup')
@@ -32,6 +33,7 @@ export function Homepage() {
 				<Button
 					title="login"
 					variant="primary"
+					type="button"
 					onClick={(event) => {
 						event.preventDefault()
 						router.push('/login')
