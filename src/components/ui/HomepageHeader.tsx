@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 
-export function HomepageHeading() {
+export function HomepageHeader() {
 	const router = useRouter()
 
 	return (

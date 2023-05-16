@@ -5,7 +5,7 @@ export default function Home() {
 	return (
 		<>
 			<Head>
-				<title>Stackhub - homepage :)</title>
+				<title>Stackhub</title>
 			</Head>
 
 			<Homepage />
