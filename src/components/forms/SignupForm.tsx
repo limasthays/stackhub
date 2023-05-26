@@ -11,8 +11,34 @@ export function SignupForm() {
 		formState: { errors },
 	} = useForm()
 
+	const onSubmitCallback = (valores: any) => {
+		console.log('submited values: ', valores)
+	}
+
+	const courseModuleOptions = [
+		{
+			title: 'Primeiro módulo (Introdução ao Frontend)',
+			value: 'Primeiro módulo (Introdução ao Frontend)',
+		},
+		{
+			title: 'Segundo módulo (Frontend Avançado)',
+			value: 'Segundo módulo (Frontend Avançado)',
+		},
+		{
+			title: 'Terceiro módulo (Introdução ao Backend)',
+			value: 'Terceiro módulo (Introdução ao Backend)',
+		},
+		{
+			title: 'Quarto módulo (Backend Avançado)',
+			value: 'Quarto módulo (Backend Avançado)',
+		},
+	]
+
 	return (
-		<form className="flex flex-col gap-4 w-[90%]">
+		<form
+			className="flex flex-col gap-4 w-[90%]"
+			onSubmit={handleSubmit(onSubmitCallback)}
+		>
 			<div>
 				<Label title="Nome" htmlFor="name" />
 				<Input {...register('name')} type="text" />
@@ -35,27 +61,7 @@ export function SignupForm() {
 
 			<div>
 				<Label title="Selecionar modulo" htmlFor="course_module" />
-				<Select
-					{...register('course_module')}
-					options={[
-						{
-							title: 'Primeiro módulo (Introdução ao Frontend)',
-							value: 'Primeiro módulo (Introdução ao Frontend)',
-						},
-						{
-							title: 'Segundo módulo (Frontend Avançado)',
-							value: 'Segundo módulo (Frontend Avançado)',
-						},
-						{
-							title: 'Terceiro módulo (Introdução ao Backend)',
-							value: 'Terceiro módulo (Introdução ao Backend)',
-						},
-						{
-							title: 'Quarto módulo (Backend Avançado)',
-							value: 'Quarto módulo (Backend Avançado)',
-						},
-					]}
-				/>
+				<Select {...register('course_module')} options={courseModuleOptions} />
 			</div>
 
 			<div>
