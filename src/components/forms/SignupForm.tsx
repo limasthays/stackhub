@@ -3,13 +3,31 @@ import { Input } from '../ui/form-components/Input'
 import { Label } from '../ui/form-components/Label'
 import { Select } from '../ui/form-components/Select'
 import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 export function SignupForm() {
+	const signupFormSchema = yup.object().shape({
+		name: yup.string().required('*Preencha seu nome'),
+		email: yup.string().required('*Preencha seu email').email('Email inválido'),
+		password: yup
+			.string()
+			.required('*Preencha sua senha')
+			.min(6, 'A senha precisa ter no mínimo 6 caracteres'),
+		confirmPassword: yup
+			.string()
+			.required('As senhas precisam ser iguais')
+			.oneOf([yup.ref('password')], 'As senhas precisam ser iguais'),
+		bio: yup.string().required('*Escreva uma bio').max(140),
+		course_module: yup.string().required('Escolha o módulo em que você está'),
+		contact: yup.string().required('*Preencha o campo de contato'),
+	})
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm()
+	} = useForm({ resolver: yupResolver(signupFormSchema) })
 
 	const onSubmitCallback = (valores: any) => {
 		console.log('submited values: ', valores)
@@ -34,6 +52,8 @@ export function SignupForm() {
 		},
 	]
 
+	console.log('erros: ', errors.name)
+
 	return (
 		<form
 			className="flex flex-col gap-4 w-[90%]"
@@ -43,6 +63,9 @@ export function SignupForm() {
 			<div>
 				<Label title="Nome" htmlFor="name" />
 				<Input {...register('name')} type="text" id="name" />
+				{/* <span>{errors.name?.message?.toString()}</span>
+				 * incluir mensagens de erro depois
+				 */}
 			</div>
 
 			<div>
