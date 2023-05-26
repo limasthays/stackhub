@@ -41,32 +41,44 @@ export function SignupForm() {
 		>
 			<div>
 				<Label title="Nome" htmlFor="name" />
-				<Input {...register('name')} type="text" />
+				<Input {...register('name')} type="text" id="name" />
 			</div>
 
 			<div>
 				<Label title="Email" htmlFor="email" />
-				<Input {...register('email')} type="email" />
+				<Input {...register('email')} type="email" id="email" />
 			</div>
 
 			<div>
 				<Label title="Senha" htmlFor="password" />
-				<Input {...register('password')} type="password" />
+				<Input {...register('password')} type="password" id="password" />
 			</div>
 
 			<div>
 				<Label title="Confirme sua senha" htmlFor="confirmPassword" />
-				<Input {...register('confirmPassword')} type="password" />
+				<Input
+					{...register('confirmPassword')}
+					type="password"
+					id="confirmPassword"
+				/>
 			</div>
 
 			<div>
 				<Label title="Selecionar modulo" htmlFor="course_module" />
-				<Select {...register('course_module')} options={courseModuleOptions} />
+				<Select
+					{...register('course_module')}
+					options={courseModuleOptions}
+					id="course_module"
+				/>
 			</div>
 
 			<div>
 				<Label title="Bio" htmlFor="bio" />
-				<Input placeholder="Escreva um pouco sobre você" {...register('bio')} />
+				<Input
+					placeholder="Escreva um pouco sobre você"
+					{...register('bio')}
+					id="bio"
+				/>
 			</div>
 			<div>
 				<Label title="Contato" htmlFor="contact" />
@@ -74,6 +86,7 @@ export function SignupForm() {
 					type="text"
 					placeholder="Opção de contato"
 					{...register('contact')}
+					id="contact"
 				/>
 			</div>
 
