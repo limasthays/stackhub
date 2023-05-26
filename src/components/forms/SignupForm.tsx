@@ -38,6 +38,7 @@ export function SignupForm() {
 		<form
 			className="flex flex-col gap-4 w-[90%]"
 			onSubmit={handleSubmit(onSubmitCallback)}
+			autoComplete="off"
 		>
 			<div>
 				<Label title="Nome" htmlFor="name" />

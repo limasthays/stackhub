@@ -7,11 +7,14 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 	(props, ref) => {
 		const { id, name, placeholder, required, disabled, type, ...rest } = props
 
+		//autoComplete="new-password" is a hint given by mdn web docs
+		//it prevents browser autocomplete fields
+
 		return (
 			<input
 				ref={ref}
 				type={type}
-				autoComplete="off"
+				autoComplete="new-password"
 				id={id}
 				name={name}
 				{...rest}
