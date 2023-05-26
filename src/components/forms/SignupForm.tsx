@@ -5,8 +5,21 @@ import { Select } from '../ui/form-components/Select'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { api } from '@/services/axiosClient'
+import { useRouter } from 'next/router'
+
+type SignupFormValues = {
+	name: string
+	email: string
+	password: string
+	contact: string
+	bio: string
+	course_module: string
+}
 
 export function SignupForm() {
+	const router = useRouter()
+
 	const signupFormSchema = yup.object().shape({
 		name: yup.string().required('*Preencha seu nome'),
 		email: yup.string().required('*Preencha seu email').email('Email inválido'),
@@ -29,8 +42,18 @@ export function SignupForm() {
 		formState: { errors },
 	} = useForm({ resolver: yupResolver(signupFormSchema) })
 
-	const onSubmitCallback = (valores: any) => {
-		console.log('submited values: ', valores)
+	const onSubmitCallback = (values: any) => {
+		console.log('valores: ', values)
+
+		api
+			.post('users', values)
+			.then((response) => {
+				console.log('Seu user foi criado :)', response)
+				router.push('/login')
+			})
+			.catch((error) => {
+				console.error('algo deu ruim', error)
+			})
 	}
 
 	const courseModuleOptions = [
@@ -51,8 +74,6 @@ export function SignupForm() {
 			value: 'Quarto módulo (Backend Avançado)',
 		},
 	]
-
-	console.log('erros: ', errors.name)
 
 	return (
 		<form
