@@ -3,6 +3,7 @@ import AuthenticationLayout from '@/components/layouts/AuthenticationLayout'
 import { AuthFormContainer } from '@/components/ui/form-components/AuthFormContainer'
 import { Button } from '@/components/ui/form-components/Button'
 import { useRouter } from 'next/router'
+import { parseCookies } from 'nookies'
 
 function SignupCallToAction() {
 	const router = useRouter()
@@ -22,7 +23,7 @@ function SignupCallToAction() {
 	)
 }
 
-export default function Login() {
+export default function Login(props: any) {
 	return (
 		<>
 			<AuthenticationLayout title="Login">
@@ -33,4 +34,14 @@ export default function Login() {
 			</AuthenticationLayout>
 		</>
 	)
+}
+
+export async function getServerSideProps(context: any) {
+	const cookies = parseCookies(context)
+	return {
+		props: {
+			TOKEN_KENZIE_HUB: cookies.TOKEN_KENZIE_HUB || null,
+			ID_KENZIE_HUB: cookies.ID_KENZIE_HUB || null,
+		},
+	}
 }
