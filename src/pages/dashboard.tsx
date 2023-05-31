@@ -1,12 +1,25 @@
-import { Button } from '@/components/ui/form-components/Button'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { DashboardContent } from '@/dashboard/layouts/DashboardContent'
 import { api } from '@/services/axiosClient'
 import { useRouter } from 'next/router'
 import { parseCookies, destroyCookie } from 'nookies'
 import { Suspense, useEffect, useState } from 'react'
 
+export type UserData = {
+	avatar_url: string | null
+	bio: string
+	contact: string
+	course_module: string
+	email: string
+	id: string
+	name: string
+	techs: any
+	works: any
+}
+
 export default function DashboardPage(props: any) {
 	const router = useRouter()
-	const [userContent, setUserContent] = useState<any>()
+	const [userContent, setUserContent] = useState<UserData>()
 	const [isUserAuth, setIsUserAuth] = useState<boolean>(false)
 
 	useEffect(() => {
@@ -14,7 +27,7 @@ export default function DashboardPage(props: any) {
 			setIsUserAuth(true)
 			const parsedId = JSON.parse(props.ID_KENZIE_HUB)
 			api
-				.get(`users/${parsedId}`)
+				.get<UserData>(`users/${parsedId}`)
 				.then((response) => {
 					setUserContent(response.data)
 				})
@@ -26,33 +39,7 @@ export default function DashboardPage(props: any) {
 		}
 	}, [])
 
-	return (
-		isUserAuth && (
-			<div>
-				<Suspense
-					fallback={
-						<>
-							<p className="text-white">carregando...</p>
-						</>
-					}
-				>
-					<p>oie! {userContent?.name}</p>
-
-					<div className="w-1/3">
-						<Button
-							title="Sair"
-							variant="primary"
-							onClick={() => {
-								destroyCookie(null, 'TOKEN_KENZIE_HUB')
-								destroyCookie(null, 'ID_KENZIE_HUB')
-								router.push('/')
-							}}
-						/>
-					</div>
-				</Suspense>
-			</div>
-		)
-	)
+	return isUserAuth && <DashboardContent data={userContent} />
 }
 
 export async function getServerSideProps(context: any) {
