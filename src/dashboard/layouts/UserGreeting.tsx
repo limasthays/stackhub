@@ -1,8 +1,9 @@
-type UserGreetingProps = {
-	userData: any
-}
+import { useContext } from 'react'
+import { DashboardContentContext } from '../contexts/DashboardContext'
 
-export function UserGreeting({ userData }: UserGreetingProps) {
+export function UserGreeting() {
+	const { userData } = useContext(DashboardContentContext)
+
 	return (
 		<div>
 			<h3 className="text-neutral-50 font-bold text-lg">

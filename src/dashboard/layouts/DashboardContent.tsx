@@ -1,16 +1,14 @@
-import { UserData } from '@/pages/dashboard'
 import { DashboardHeader } from './DashboardHeader'
 import { UserGreeting } from './UserGreeting'
+import { UserData } from '../types/types'
+import { useContext } from 'react'
+import { DashboardContentContext } from '../contexts/DashboardContext'
 
-type DashboardContentProps = {
-	data: UserData | undefined
-}
-
-export function DashboardContent({ data }: DashboardContentProps) {
+export function DashboardContent() {
 	return (
 		<main className="bg-neutral-900 max-w-3xl mx-auto p-8">
 			<DashboardHeader />
-			<UserGreeting userData={data} />
+			<UserGreeting />
 		</main>
 	)
 }
