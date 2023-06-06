@@ -9,3 +9,8 @@ export type UserData = {
 	techs: any
 	works: any
 }
+
+export type TechItemProps = {
+	title: string
+	status: string
+}
