@@ -10,7 +10,7 @@ export function ModalContainer({
 	title,
 }: ModalContainerProps) {
 	const handleBackgroundClick = (event: React.MouseEvent<HTMLDivElement>) => {
-		if (event.target.id === 'modal') {
+		if ((event.target as HTMLDivElement).id === 'modal') {
 			onClose()
 		}
 	}
