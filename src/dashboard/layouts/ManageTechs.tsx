@@ -2,17 +2,27 @@ import { useContext, useState } from 'react'
 import { TechsHeader } from '../components/techs/TechsHeader'
 import TechsList from '../components/techs/TechsList'
 import { DashboardContentContext } from '../contexts/DashboardContext'
-import { ModalContainer } from '@/components/modals/ModalContainer'
+import { IncludeTechModal } from '../components/modals/IncludeTechModal'
 
 export function ManageTechs() {
 	const { userData } = useContext(DashboardContentContext)
-	const [isModalVisible, setIsModalVisible] = useState(true)
+	const [isModalVisible, setIsModalVisible] = useState(false)
 
 	return (
 		<>
-			{isModalVisible && <ModalContainer />}
+			{isModalVisible && (
+				<IncludeTechModal
+					onClose={() => {
+						setIsModalVisible(false)
+					}}
+				/>
+			)}
 			<section>
-				<TechsHeader />
+				<TechsHeader
+					handleModal={() => {
+						setIsModalVisible(true)
+					}}
+				/>
 				<TechsList techs={userData?.techs} />
 			</section>
 		</>
