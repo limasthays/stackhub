@@ -6,11 +6,12 @@ export type UserData = {
 	email: string
 	id: string
 	name: string
-	techs: any
+	techs: TechItemProps[]
 	works: any
 }
 
 export type TechItemProps = {
 	title: string
 	status: string
+	id: string
 }
