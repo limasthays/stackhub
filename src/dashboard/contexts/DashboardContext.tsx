@@ -4,7 +4,8 @@ import { parseCookies } from 'nookies'
 import { api } from '@/services/axiosClient'
 
 type DashboardContentProps = {
-	userData?: UserData
+	userData: UserData
+	setUserData: React.Dispatch<React.SetStateAction<UserData>>
 }
 
 export const DashboardContentContext = createContext<DashboardContentProps>(
@@ -16,7 +17,7 @@ export function DashboardContentProvider({
 }: {
 	children: React.ReactNode
 }) {
-	const [userData, setUserData] = useState<UserData>()
+	const [userData, setUserData] = useState<UserData>({} as UserData)
 	const cookies = parseCookies()
 
 	useEffect(() => {
@@ -29,13 +30,13 @@ export function DashboardContentProvider({
 					setUserData(response.data)
 				})
 				.catch((error) => {
-					console.error('algo deu errado: ', error)
+					console.error('algo deu errado no context: ', error)
 				})
 		}
 	}, [])
 
 	return (
-		<DashboardContentContext.Provider value={{ userData }}>
+		<DashboardContentContext.Provider value={{ userData, setUserData }}>
 			{children}
 		</DashboardContentContext.Provider>
 	)
