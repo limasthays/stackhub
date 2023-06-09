@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { TechsHeader } from '../components/techs/TechsHeader'
-import TechsList from '../components/techs/TechsList'
+import { TechsList } from '../components/techs/TechsList'
 import { DashboardContentContext } from '../contexts/DashboardContext'
 import { IncludeTechModal } from '../components/modals/IncludeTechModal'
 
