@@ -4,6 +4,7 @@ import { AuthFormContainer } from '@/components/ui/form-components/AuthFormConta
 import { Button } from '@/components/ui/form-components/Button'
 import { useRouter } from 'next/router'
 import { parseCookies } from 'nookies'
+import { useEffect, useState } from 'react'
 
 function SignupCallToAction() {
 	const router = useRouter()
@@ -24,15 +25,25 @@ function SignupCallToAction() {
 }
 
 export default function Login(props: any) {
+	const router = useRouter()
+	const [isUserAuth, setIsUserAuth] = useState<boolean>(false)
+
+	useEffect(() => {
+		if (props.TOKEN_KENZIE_HUB && props.ID_KENZIE_HUB) {
+			router.push('/dashboard')
+			setIsUserAuth(true)
+		}
+	}, [])
+
 	return (
-		<>
+		isUserAuth === false && (
 			<AuthenticationLayout title="Login">
 				<AuthFormContainer authTitle="Login">
 					<LoginForm />
 					<SignupCallToAction />
 				</AuthFormContainer>
 			</AuthenticationLayout>
-		</>
+		)
 	)
 }
 
