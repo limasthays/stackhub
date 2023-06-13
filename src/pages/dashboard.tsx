@@ -1,11 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { DashboardContent } from '@/dashboard/layouts/DashboardContent'
-import { api } from '@/services/axiosClient'
 import { useRouter } from 'next/router'
-import { parseCookies, destroyCookie } from 'nookies'
+import { parseCookies } from 'nookies'
 import { Suspense, useContext, useEffect, useState } from 'react'
-import { UserData } from '@/dashboard/types/types'
 import { DashboardContentProvider } from '@/dashboard/contexts/DashboardContext'
+import Head from 'next/head'
 
 export default function DashboardPage(props: any) {
 	const router = useRouter()
@@ -21,9 +20,14 @@ export default function DashboardPage(props: any) {
 
 	return (
 		isUserAuth && (
-			<DashboardContentProvider>
-				<DashboardContent />
-			</DashboardContentProvider>
+			<>
+				<Head>
+					<title>Dashboard | Stackhub</title>
+				</Head>
+				<DashboardContentProvider>
+					<DashboardContent />
+				</DashboardContentProvider>
+			</>
 		)
 	)
 }
