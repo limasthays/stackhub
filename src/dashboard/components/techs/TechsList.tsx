@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid'
 
 export function TechsList({ techs }: { techs: TechItemProps[] }) {
 	return (
-		<div className="bg-neutral-800 rounded flex flex-col gap-2 p-3">
+		<div className="bg-neutral-800 rounded flex flex-col gap-2 p-3 mt-4">
 			{techs?.map((item) => (
 				<TechItem
 					key={nanoid()}

@@ -17,7 +17,7 @@ export function ManageTechs() {
 					}}
 				/>
 			)}
-			<section>
+			<section className="py-5">
 				<TechsHeader
 					handleModal={() => {
 						setIsModalVisible(true)

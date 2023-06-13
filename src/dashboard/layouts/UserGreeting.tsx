@@ -5,9 +5,9 @@ export function UserGreeting() {
 	const { userData } = useContext(DashboardContentContext)
 
 	return (
-		<div>
+		<div className="py-8">
 			<h3 className="text-neutral-50 font-bold text-lg">
-				Ola, {userData?.name}
+				Olá, {userData?.name}
 			</h3>
 			<p>{userData?.course_module}</p>
 		</div>
