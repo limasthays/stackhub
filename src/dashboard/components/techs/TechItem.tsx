@@ -33,8 +33,10 @@ function TechItem({ status, title, id }: TechItemProps) {
 	}
 
 	return (
-		<div className="flex justify-between items-center bg-neutral-900 p-2 rounded">
-			<span className="font-semibold">{title}</span>
+		<div className="flex justify-between items-center bg-neutral-900 hover:bg-neutral-700 p-2 rounded">
+			<span className="font-semibold text-sm capitalize w-[180px] md:w-[350px] overflow-hidden whitespace-nowrap text-ellipsis">
+				{title}
+			</span>
 
 			<div className="flex items-center gap-4">
 				<span className="text-neutral-500 text-xs">{status}</span>
