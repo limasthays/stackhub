@@ -7,6 +7,7 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { api } from '@/services/axiosClient'
 import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
 
 type SignupFormValues = {
 	name: string
@@ -43,12 +44,10 @@ export function SignupForm() {
 	} = useForm({ resolver: yupResolver(signupFormSchema) })
 
 	const onSubmitCallback = (values: any) => {
-		console.log('valores: ', values)
-
 		api
 			.post('users', values)
 			.then((response) => {
-				console.log('Seu user foi criado :)', response)
+				toast.success('Conta criada com sucesso! Agora faca login.')
 				router.push('/login')
 			})
 			.catch((error) => {

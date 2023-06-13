@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { api } from '@/services/axiosClient'
 import { setCookie } from 'nookies'
 import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
 
 export function LoginForm() {
 	const router = useRouter()
@@ -43,6 +44,7 @@ export function LoginForm() {
 			.post('/sessions', values)
 			.then((response) => {
 				handleLoginResponse(response)
+				toast.success('seu login deu certo! :)')
 			})
 			.catch((error) => {
 				console.error('deu ruim, ', error)
