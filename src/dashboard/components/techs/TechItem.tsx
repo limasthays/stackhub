@@ -13,7 +13,7 @@ function TechItem({ status, title, id }: TechItemProps) {
 	const handleDeleteTech = () => {
 		if (
 			confirm(
-				'Deseja mesmo deletar essa tecnologia do seu perfil? Essa acao e irreversivel'
+				'Deseja mesmo deletar essa tecnologia do seu perfil? Essa ação é irreversível!'
 			)
 		) {
 			api

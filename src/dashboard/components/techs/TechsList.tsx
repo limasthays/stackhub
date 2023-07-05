@@ -16,7 +16,8 @@ export function TechsList({ techs }: { techs: TechItemProps[] }) {
 
 			{techs?.length === 0 && (
 				<span>
-					voce nao tem nenhuma tech cadastrada. que tal cadastrar alguma? :)
+					Você ainda não tem nenhuma tech cadastrada. Que tal cadastrar alguma e
+					mostrar o seu conhecimento? :)
 				</span>
 			)}
 		</div>

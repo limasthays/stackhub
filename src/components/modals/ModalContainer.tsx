@@ -1,3 +1,5 @@
+import { MdClose } from 'react-icons/md'
+
 type ModalContainerProps = {
 	onClose: () => void
 	children: React.ReactNode
@@ -23,14 +25,11 @@ export function ModalContainer({
 			id="modal"
 			className="bg-neutral-900/50 absolute top-0 left-0 w-full h-full flex items-center justify-center"
 		>
-			<section className="md:w-1/2">
-				<div className="flex justify-between items-center bg-neutral-700 px-4 rounded-t">
-					<span>{title}</span>
-					<button
-						className="rounded p-2 font-bold bg-neutral-700"
-						onClick={onClose}
-					>
-						x
+			<section className="mx-3 w-full max-w-[300px]">
+				<div className="flex justify-between items-center bg-neutral-700 px-4 py-2 rounded-t">
+					<span className="text-sm">{title}</span>
+					<button className="font-bold bg-neutral-700" onClick={onClose}>
+						<MdClose />
 					</button>
 				</div>
 
