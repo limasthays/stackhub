@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { api } from '@/services/axiosClient'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
+import { ErrorMessage } from '../ui/form-components/ErrorMessage'
 
 type SignupFormValues = {
 	name: string
@@ -27,13 +28,13 @@ export function SignupForm() {
 		password: yup
 			.string()
 			.required('*Preencha sua senha')
-			.min(6, 'A senha precisa ter no mínimo 6 caracteres'),
+			.min(6, '*A senha precisa ter no mínimo 6 caracteres'),
 		confirmPassword: yup
 			.string()
-			.required('As senhas precisam ser iguais')
-			.oneOf([yup.ref('password')], 'As senhas precisam ser iguais'),
+			.required('*Confirme sua senha')
+			.oneOf([yup.ref('password')], '*As senhas precisam ser iguais'),
 		bio: yup.string().required('*Escreva uma bio').max(140),
-		course_module: yup.string().required('Escolha o módulo em que você está'),
+		course_module: yup.string().required('*Escolha o módulo em que você está'),
 		contact: yup.string().required('*Preencha o campo de contato'),
 	})
 
@@ -47,11 +48,11 @@ export function SignupForm() {
 		api
 			.post('users', values)
 			.then((response) => {
-				toast.success('Conta criada com sucesso! Agora faca login.')
+				toast.success('Conta criada com sucesso! Faça seu login.')
 				router.push('/login')
 			})
 			.catch((error) => {
-				console.error('algo deu ruim', error)
+				console.error('Erro:', error)
 			})
 	}
 
@@ -83,19 +84,25 @@ export function SignupForm() {
 			<div>
 				<Label title="Nome" htmlFor="name" />
 				<Input {...register('name')} type="text" id="name" />
-				{/* <span>{errors.name?.message?.toString()}</span>
-				 * incluir mensagens de erro depois
-				 */}
+				{errors.name && (
+					<ErrorMessage>{errors.name?.message?.toString()}</ErrorMessage>
+				)}
 			</div>
 
 			<div>
 				<Label title="Email" htmlFor="email" />
 				<Input {...register('email')} type="email" id="email" />
+				{errors.email && (
+					<ErrorMessage>{errors.email?.message?.toString()}</ErrorMessage>
+				)}
 			</div>
 
 			<div>
 				<Label title="Senha" htmlFor="password" />
 				<Input {...register('password')} type="password" id="password" />
+				{errors.password && (
+					<ErrorMessage>{errors.password?.message?.toString()}</ErrorMessage>
+				)}
 			</div>
 
 			<div>
@@ -105,6 +112,11 @@ export function SignupForm() {
 					type="password"
 					id="confirmPassword"
 				/>
+				{errors.confirmPassword && (
+					<ErrorMessage>
+						{errors.confirmPassword?.message?.toString()}
+					</ErrorMessage>
+				)}
 			</div>
 
 			<div>
@@ -114,6 +126,11 @@ export function SignupForm() {
 					options={courseModuleOptions}
 					id="course_module"
 				/>
+				{errors.course_module && (
+					<ErrorMessage>
+						{errors.course_module?.message?.toString()}
+					</ErrorMessage>
+				)}
 			</div>
 
 			<div>
@@ -123,6 +140,9 @@ export function SignupForm() {
 					{...register('bio')}
 					id="bio"
 				/>
+				{errors.bio && (
+					<ErrorMessage>{errors.bio?.message?.toString()}</ErrorMessage>
+				)}
 			</div>
 			<div>
 				<Label title="Contato" htmlFor="contact" />
@@ -132,6 +152,9 @@ export function SignupForm() {
 					{...register('contact')}
 					id="contact"
 				/>
+				{errors.contact && (
+					<ErrorMessage>{errors.contact?.message?.toString()}</ErrorMessage>
+				)}
 			</div>
 
 			<Button title="Cadastrar!" variant="primary" type="submit" />
