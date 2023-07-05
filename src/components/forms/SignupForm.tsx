@@ -10,15 +10,6 @@ import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 import { ErrorMessage } from '../ui/form-components/ErrorMessage'
 
-type SignupFormValues = {
-	name: string
-	email: string
-	password: string
-	contact: string
-	bio: string
-	course_module: string
-}
-
 export function SignupForm() {
 	const router = useRouter()
 
@@ -53,6 +44,7 @@ export function SignupForm() {
 			})
 			.catch((error) => {
 				console.error('Erro:', error)
+				toast.error('Opa! Algo deu errado.')
 			})
 	}
 
@@ -157,7 +149,12 @@ export function SignupForm() {
 				)}
 			</div>
 
-			<Button title="Cadastrar!" variant="primary" type="submit" />
+			<Button
+				title="Cadastrar!"
+				variant="primary"
+				type="submit"
+				disabled={Object.keys(errors).length !== 0}
+			/>
 		</form>
 	)
 }

@@ -12,17 +12,20 @@ export function Button({
 	type,
 	onClick,
 	size = 'base',
+	disabled,
 }: ButtonProps) {
 	return (
 		<button
 			className={classNames('rounded font-bold text-sm leading-none', {
-				['bg-purple-600']: variant === 'primary',
-				['border-2']: variant === 'secondary',
-				' w-full p-3': size === 'base',
+				'bg-purple-600': variant === 'primary',
+				'border-2': variant === 'secondary',
+				'w-full p-3': size === 'base',
 				'px-4 py-3': size === 'sm',
+				'opacity-50': disabled,
 			})}
 			type={type}
 			onClick={onClick}
+			disabled={disabled}
 		>
 			{title}
 		</button>
